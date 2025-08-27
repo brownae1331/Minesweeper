@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Minesweeper.dir/src/Cell.cpp.o"
+  "CMakeFiles/Minesweeper.dir/src/Cell.cpp.o.d"
   "CMakeFiles/Minesweeper.dir/src/main.cpp.o"
   "CMakeFiles/Minesweeper.dir/src/main.cpp.o.d"
   "Minesweeper"

@@ -129,6 +129,30 @@ Minesweeper/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/build
 .PHONY : Minesweeper/fast
 
+src/Cell.o: src/Cell.cpp.o
+.PHONY : src/Cell.o
+
+# target to build an object file
+src/Cell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/src/Cell.cpp.o
+.PHONY : src/Cell.cpp.o
+
+src/Cell.i: src/Cell.cpp.i
+.PHONY : src/Cell.i
+
+# target to preprocess a source file
+src/Cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/src/Cell.cpp.i
+.PHONY : src/Cell.cpp.i
+
+src/Cell.s: src/Cell.cpp.s
+.PHONY : src/Cell.s
+
+# target to generate assembly for a file
+src/Cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/src/Cell.cpp.s
+.PHONY : src/Cell.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Minesweeper"
+	@echo "... src/Cell.o"
+	@echo "... src/Cell.i"
+	@echo "... src/Cell.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

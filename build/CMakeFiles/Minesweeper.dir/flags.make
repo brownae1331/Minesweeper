@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/clang++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /opt/homebrew/include
+CXX_INCLUDES = -I/Users/andy/Desktop/Minesweeper/src -isystem /opt/homebrew/include
 
 CXX_FLAGSarm64 = -g -std=gnu++17 -arch arm64
 
