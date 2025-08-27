@@ -85,12 +85,12 @@ clean: CMakeFiles/Minesweeper.dir/clean
 CMakeFiles/Minesweeper.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/andy/Desktop/Minesweeper/build/CMakeFiles --progress-num=1,2 "Built target Minesweeper"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/andy/Desktop/Minesweeper/build/CMakeFiles --progress-num=1,2,3 "Built target Minesweeper"
 .PHONY : CMakeFiles/Minesweeper.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Minesweeper.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/andy/Desktop/Minesweeper/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/andy/Desktop/Minesweeper/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Minesweeper.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/andy/Desktop/Minesweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Minesweeper.dir/rule
@@ -102,7 +102,7 @@ Minesweeper: CMakeFiles/Minesweeper.dir/rule
 # codegen rule for target.
 CMakeFiles/Minesweeper.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Minesweeper.dir/build.make CMakeFiles/Minesweeper.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/andy/Desktop/Minesweeper/build/CMakeFiles --progress-num=1,2 "Finished codegen for target Minesweeper"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/andy/Desktop/Minesweeper/build/CMakeFiles --progress-num=1,2,3 "Finished codegen for target Minesweeper"
 .PHONY : CMakeFiles/Minesweeper.dir/codegen
 
 # clean rule for target.

@@ -1,8 +1,14 @@
 [
 {
   "directory": "/Users/andy/Desktop/Minesweeper/build",
-  "command": "/usr/bin/clang++  -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/Minesweeper.dir/src/main.cpp.o -c /Users/andy/Desktop/Minesweeper/src/main.cpp",
+  "command": "/usr/bin/clang++  -I/Users/andy/Desktop/Minesweeper/src -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/Minesweeper.dir/src/main.cpp.o -c /Users/andy/Desktop/Minesweeper/src/main.cpp",
   "file": "/Users/andy/Desktop/Minesweeper/src/main.cpp",
   "output": "CMakeFiles/Minesweeper.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/andy/Desktop/Minesweeper/build",
+  "command": "/usr/bin/clang++  -I/Users/andy/Desktop/Minesweeper/src -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/Minesweeper.dir/src/Cell.cpp.o -c /Users/andy/Desktop/Minesweeper/src/Cell.cpp",
+  "file": "/Users/andy/Desktop/Minesweeper/src/Cell.cpp",
+  "output": "CMakeFiles/Minesweeper.dir/src/Cell.cpp.o"
 }
 ]

@@ -1,5 +1,6 @@
-CMakeFiles/Minesweeper.dir/src/main.cpp.o: \
-  /Users/andy/Desktop/Minesweeper/src/main.cpp \
+CMakeFiles/Minesweeper.dir/src/Cell.cpp.o: \
+  /Users/andy/Desktop/Minesweeper/src/Cell.cpp \
+  /Users/andy/Desktop/Minesweeper/src/../include/Cell.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
   /opt/homebrew/include/SFML/Graphics/Export.hpp \
@@ -895,5 +896,4 @@ CMakeFiles/Minesweeper.dir/src/main.cpp.o: \
   /opt/homebrew/include/SFML/System/FileInputStream.hpp \
   /opt/homebrew/include/SFML/System/InputStream.hpp \
   /opt/homebrew/include/SFML/System/MemoryInputStream.hpp \
-  /opt/homebrew/include/SFML/System/Sleep.hpp \
-  /Users/andy/Desktop/Minesweeper/src/../include/Cell.hpp
+  /opt/homebrew/include/SFML/System/Sleep.hpp
