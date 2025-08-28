@@ -5,10 +5,16 @@
 #include "Cell.hpp"
 #include <SFML/Graphics.hpp>
 
-class Board {
+class Board : public sf::Drawable {
     public:
         Board(int rows, int cols, int mines);
-        void draw(sf::RenderTarget& target) const;
+        
+    private:
+    void draw(sf::RenderTarget& target, sf::RenderStates states = {}) const override;
+    std::vector<std::vector<Cell>> m_cells;
+    int m_rows;
+    int m_cols;
+    int m_mines;
 };
 
 #endif

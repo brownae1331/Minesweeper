@@ -8,8 +8,9 @@ find_package(SFML COMPONENTS Graphics Audio Window System REQUIRED)
 add_executable(Minesweeper
     src/main.cpp
     src/Cell.cpp
+    src/Board.cpp
 )
 
-target_include_directories(Minesweeper PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(Minesweeper PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(Minesweeper PRIVATE SFML::Graphics SFML::Audio SFML::Window SFML::System)
