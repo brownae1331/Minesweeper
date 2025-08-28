@@ -1,14 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include "../include/Cell.hpp"
+#include "../include/Board.hpp"
 
 using namespace sf;
 using namespace std;
 
 int main()
 {
-    RenderWindow window(VideoMode({800, 600}), "Minesweeper");
+    RenderWindow window(VideoMode({320, 320}), "Minesweeper");
 
-    Cell cell(0, 0, false);
+    Board board(10, 10, 0);
 
     while (window.isOpen())
     {
@@ -19,7 +19,7 @@ int main()
         }
 
         window.clear();
-        window.draw(cell);
+        window.draw(board);
         window.display();
     }
 }
