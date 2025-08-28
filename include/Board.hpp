@@ -8,6 +8,7 @@
 class Board : public sf::Drawable {
     public:
         Board(int rows, int cols, int mines);
+        void handleClick(const sf::Vector2i& pixelPosition, bool isRightClick);
         
     private:
     void draw(sf::RenderTarget& target, sf::RenderStates states = {}) const override;

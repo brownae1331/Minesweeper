@@ -6,9 +6,13 @@
 class Cell : public sf::Drawable {
     public:
         static constexpr int SIZE = 32;
-        static constexpr sf::Color LIGHT_BLUE = sf::Color(173, 216, 230);
-        static constexpr sf::Color DARK_BLUE = sf::Color::Blue;
+        static constexpr sf::Color LIGHT_BLUE = sf::Color(65, 105, 225);
+        static constexpr sf::Color DARK_BLUE = sf::Color(15, 82, 186);
+        static constexpr sf::Color LIGHT_GREY = sf::Color(211, 211, 211);
         Cell(int row, int col, bool isMine);
+        void reveal();
+        void flag();
+        bool isFlagged() const;
 
     private:
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

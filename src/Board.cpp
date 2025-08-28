@@ -15,6 +15,25 @@ Board::Board(int rows, int cols, int mines) :
         }
     }
 
+void Board::handleClick(const sf::Vector2i& pixelPosition, bool isRightClick)
+{
+    const int col = pixelPosition.x / Cell::SIZE;
+    const int row = pixelPosition.y / Cell::SIZE;
+
+    if (row < 0 || row >= m_rows || col < 0 || col >= m_cols) {
+        return;
+    }
+
+    Cell& cell = m_cells[row][col];
+    if (isRightClick) {
+        cell.flag();
+    } else {
+        if (!cell.isFlagged()) {
+            cell.reveal();
+        }
+    }
+}
+
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     for (const auto& row : m_cells) {
         for (const auto& cell : row) {

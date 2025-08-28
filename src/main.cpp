@@ -16,6 +16,15 @@ int main()
         {
             if (event->is<Event::Closed>())
                 window.close();
+            else if (event->is<Event::MouseButtonPressed>())
+            {
+                if (const auto* mouseEvent = event->getIf<Event::MouseButtonPressed>())
+                {
+                    const bool isRightClick = mouseEvent->button == Mouse::Button::Right;
+                    const Vector2i mousePos = mouseEvent->position;
+                    board.handleClick(mousePos, isRightClick);
+                }
+            }
         }
 
         window.clear();
