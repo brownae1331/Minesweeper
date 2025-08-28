@@ -1,8 +1,8 @@
 #include "../include/Board.hpp"
 #include "../include/Cell.hpp"
-#include <iostream>
 #include <algorithm>
 #include <random>
+#include <queue>
 
 Board::Board(int rows, int cols, int mines) : 
     m_rows(rows), m_cols(cols), m_mines(mines), m_isInitialized(false)
@@ -30,13 +30,26 @@ void Board::handleClick(const sf::Vector2i& pixelPosition, bool isRightClick)
     Cell& cell = m_cells[row][col];
     if (isRightClick) {
         cell.flag();
+        return;
+    }
+
+    if (cell.isFlagged()) {
+        return;
+    }
+
+    if (!m_isInitialized) {
+        initializeBoard(cell);
+    }
+
+    if (cell.isMine()) {
+        cell.reveal();
+        return;
+    }
+
+    if (cell.getNeighborMines() == 0) {
+        floodRevealFrom(row, col);
     } else {
-        if (!cell.isFlagged()) {
-            if (!m_isInitialized) {
-                initializeBoard(cell);
-            }
-            cell.reveal();
-        }
+        cell.reveal();
     }
 }
 
@@ -76,6 +89,75 @@ void Board::initializeBoard(Cell& initialCell) {
         int row = idx / m_cols;
         int col = idx % m_cols;
         m_cells[row][col].setMine();
-        std::cout << "Mine set at: " << row << ", " << col << std::endl;
+    }
+
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            if (m_cells[r][c].isMine()) {
+                continue;
+            }
+
+            int count = 0;
+            for (int dr = -1; dr <= 1; ++dr) {
+                for (int dc = -1; dc <= 1; ++dc) {
+                    if (dr == 0 && dc == 0) {
+                        continue;
+                    }
+                    const int nr = r + dr;
+                    const int nc = c + dc;
+                    if (nr < 0 || nr >= m_rows || nc < 0 || nc >= m_cols) {
+                        continue;
+                    }
+                    if (m_cells[nr][nc].isMine()) {
+                        ++count;
+                    }
+                }
+            }
+            m_cells[r][c].setNeighborMines(count);
+        }
+    }
+}
+
+void Board::floodRevealFrom(int startRow, int startCol) {
+    if (startRow < 0 || startRow >= m_rows || startCol < 0 || startCol >= m_cols) {
+        return;
+    }
+
+    std::queue<std::pair<int, int>> toVisit;
+    toVisit.emplace(startRow, startCol);
+
+    while (!toVisit.empty()) {
+        const auto [row, col] = toVisit.front();
+        toVisit.pop();
+
+        Cell& current = m_cells[row][col];
+
+        if (current.isRevealed() || current.isFlagged()) {
+            continue;
+        }
+
+        current.reveal();
+
+        if (current.isMine()) {
+            continue;
+        }
+
+        if (current.getNeighborMines() == 0) {
+            for (int dr = -1; dr <= 1; ++dr) {
+                for (int dc = -1; dc <= 1; ++dc) {
+                    if (dr == 0 && dc == 0) {
+                        continue;
+                    }
+                    const int nr = row + dr;
+                    const int nc = col + dc;
+                    if (nr < 0 || nr >= m_rows || nc < 0 || nc >= m_cols) {
+                        continue;
+                    }
+                    if (!m_cells[nr][nc].isRevealed() && !m_cells[nr][nc].isFlagged()) {
+                        toVisit.emplace(nr, nc);
+                    }
+                }
+            }
+        }
     }
 }

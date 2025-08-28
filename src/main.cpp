@@ -6,9 +6,9 @@ using namespace std;
 
 int main()
 {
-    RenderWindow window(VideoMode({320, 320}), "Minesweeper");
+    RenderWindow window(VideoMode({288, 288}), "Minesweeper");
 
-    Board board(10, 10, 99);
+    Board board(9, 9, 10);
 
     while (window.isOpen())
     {

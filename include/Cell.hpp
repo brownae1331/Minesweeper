@@ -14,8 +14,12 @@ class Cell : public sf::Drawable {
         void flag();
         bool isFlagged() const;
         void setMine();
+        bool isMine() const;
         int getRow() const;
         int getCol() const;
+        void setNeighborMines(int count);
+        int getNeighborMines() const;
+        bool isRevealed() const;
 
     private:
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
