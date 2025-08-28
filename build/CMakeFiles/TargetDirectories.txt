@@ -1,3 +1,0 @@
-/Users/andy/Desktop/Minesweeper/build/CMakeFiles/Minesweeper.dir
-/Users/andy/Desktop/Minesweeper/build/CMakeFiles/edit_cache.dir
-/Users/andy/Desktop/Minesweeper/build/CMakeFiles/rebuild_cache.dir
