@@ -65,29 +65,42 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Board::initializeBoard(Cell& initialCell) {
     m_isInitialized = true;
 
-    const int totalCells = m_rows * m_cols;
-    const int targetMines = std::min(m_mines, totalCells - 1);
     const int initRow = initialCell.getRow();
     const int initCol = initialCell.getCol();
+
+    const int totalCells = m_rows * m_cols;
+    std::vector<bool> isExcluded(totalCells, false);
+    for (int dr = -1; dr <= 1; ++dr) {
+        for (int dc = -1; dc <= 1; ++dc) {
+            const int nr = initRow + dr;
+            const int nc = initCol + dc;
+            if (nr < 0 || nr >= m_rows || nc < 0 || nc >= m_cols) {
+                continue;
+            }
+            isExcluded[nr * m_cols + nc] = true;
+        }
+    }
 
     std::vector<int> indices;
     indices.reserve(totalCells);
     for (int r = 0; r < m_rows; ++r) {
         for (int c = 0; c < m_cols; ++c) {
-            indices.push_back(r * m_cols + c);
+            const int idx = r * m_cols + c;
+            if (!isExcluded[idx]) {
+                indices.push_back(idx);
+            }
         }
     }
 
-    const int initialIndex = initRow * m_cols + initCol;
-    indices.erase(std::remove(indices.begin(), indices.end(), initialIndex), indices.end());
+    const int targetMines = std::min(m_mines, static_cast<int>(indices.size()));
 
     std::mt19937 rng(std::random_device{}());
     std::shuffle(indices.begin(), indices.end(), rng);
 
     for (int i = 0; i < targetMines; ++i) {
-        int idx = indices[i];
-        int row = idx / m_cols;
-        int col = idx % m_cols;
+        const int idx = indices[i];
+        const int row = idx / m_cols;
+        const int col = idx % m_cols;
         m_cells[row][col].setMine();
     }
 
@@ -160,4 +173,12 @@ void Board::floodRevealFrom(int startRow, int startCol) {
             }
         }
     }
+}
+
+int Board::getRows() const {
+    return m_rows;
+}
+
+int Board::getCols() const {
+    return m_cols;
 }
