@@ -6,9 +6,13 @@ using namespace std;
 
 int main()
 {
-    RenderWindow window(VideoMode({288, 288}), "Minesweeper");
-
-    Board board(9, 9, 10);
+    Board board(16, 30, 99);
+    int rows = board.getRows();
+    int cols = board.getCols();
+    unsigned int windowWidth = cols * Cell::SIZE;
+    unsigned int windowHeight = rows * Cell::SIZE;
+    
+    RenderWindow window(VideoMode({windowWidth, windowHeight}), "Minesweeper");
 
     while (window.isOpen())
     {
