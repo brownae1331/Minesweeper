@@ -8,7 +8,7 @@ int main()
 {
     RenderWindow window(VideoMode({320, 320}), "Minesweeper");
 
-    Board board(10, 10, 0);
+    Board board(10, 10, 99);
 
     while (window.isOpen())
     {
