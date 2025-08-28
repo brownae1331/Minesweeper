@@ -16,38 +16,58 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
     if (m_isRevealed) {
         cell.setFillColor(LIGHT_GREY);
-    } else {
-        const bool isLight = ((m_row + m_col) % 2) == 0;
-        cell.setFillColor(isLight ? LIGHT_BLUE : DARK_BLUE);
-    }
+        target.draw(cell, states);
+        if (m_isMine){
+            static sf::Texture mineTexture;
+            static bool mineLoaded = false;
+            if (!mineLoaded) {
+                mineLoaded = mineTexture.loadFromFile("/Users/andy/Desktop/Minesweeper/assets/sprites/Mine.png");
+            }
+                if (mineLoaded) {
+                    sf::Sprite mineSprite(mineTexture);
+                    const float baseX = static_cast<float>(m_col * SIZE);
+                    const float baseY = static_cast<float>(m_row * SIZE);
+                    const sf::FloatRect spriteBounds = mineSprite.getLocalBounds();
+                    const float scaleX = static_cast<float>(SIZE) / spriteBounds.size.x;
+                    const float scaleY = static_cast<float>(SIZE) / spriteBounds.size.y;
+                    const float uniformScale = (scaleX < scaleY ? scaleX : scaleY);
+                    mineSprite.setScale(sf::Vector2f(uniformScale, uniformScale));
+                    mineSprite.setPosition(sf::Vector2f(baseX, baseY));
 
-    target.draw(cell, states);
-
-    if (m_isRevealed) {
-        static sf::Font font;
-        static bool fontLoaded = false;
-        if (!fontLoaded) {
-            fontLoaded = font.openFromFile("/Library/Fonts/Arial.ttf");
+                    target.draw(mineSprite, states);
+                }
+        }
+        else {  
+            static sf::Font font;
+            static bool fontLoaded = false;
             if (!fontLoaded) {
-                fontLoaded = font.openFromFile("/System/Library/Fonts/Supplemental/Arial.ttf");
+                fontLoaded = font.openFromFile("/Library/Fonts/Arial.ttf");
+                if (!fontLoaded) {
+                    fontLoaded = font.openFromFile("/System/Library/Fonts/Supplemental/Arial.ttf");
+                }
+            }
+            
+            if (fontLoaded) {
+                sf::Text text(font);
+                text.setString(std::to_string(neighborMines));
+                text.setCharacterSize(18);
+                text.setFillColor(sf::Color::White);
+                
+                const float baseX = static_cast<float>(m_col * SIZE);
+                const float baseY = static_cast<float>(m_row * SIZE);
+                const sf::FloatRect bounds = text.getLocalBounds();
+                const float posX = baseX + (SIZE - bounds.size.x) * 0.5f - bounds.position.x;
+                const float posY = baseY + (SIZE - bounds.size.y) * 0.5f - bounds.position.y;
+                text.setPosition(sf::Vector2f(posX, posY));
+                
+                target.draw(text);
             }
         }
-        
-        if (fontLoaded) {
-            sf::Text text(font);
-            text.setString(std::to_string(neighborMines));
-            text.setCharacterSize(18);
-            text.setFillColor(sf::Color::White);
-            
-            const float baseX = static_cast<float>(m_col * SIZE);
-            const float baseY = static_cast<float>(m_row * SIZE);
-            const sf::FloatRect bounds = text.getLocalBounds();
-            const float posX = baseX + (SIZE - bounds.size.x) * 0.5f - bounds.position.x;
-            const float posY = baseY + (SIZE - bounds.size.y) * 0.5f - bounds.position.y;
-            text.setPosition(sf::Vector2f(posX, posY));
-            
-            target.draw(text);
-        }
+    }
+    else {
+        const bool isLight = ((m_row + m_col) % 2) == 0;
+        cell.setFillColor(isLight ? LIGHT_BLUE : DARK_BLUE);
+        target.draw(cell, states);
     }
 
     if (m_isFlagged) {
@@ -92,4 +112,19 @@ void Cell::flag()
 bool Cell::isFlagged() const
 {
     return m_isFlagged;
+}
+
+void Cell::setMine()
+{
+    m_isMine = true;
+}
+
+int Cell::getRow() const
+{
+    return m_row;
+}
+
+int Cell::getCol() const
+{
+    return m_col;
 }

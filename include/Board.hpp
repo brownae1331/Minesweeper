@@ -12,10 +12,12 @@ class Board : public sf::Drawable {
         
     private:
     void draw(sf::RenderTarget& target, sf::RenderStates states = {}) const override;
+    void initializeBoard(Cell& initialCell);
     std::vector<std::vector<Cell>> m_cells;
     int m_rows;
     int m_cols;
     int m_mines;
+    bool m_isInitialized;
 };
 
 #endif
