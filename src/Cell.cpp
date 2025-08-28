@@ -47,7 +47,7 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const
                 }
             }
             
-            if (fontLoaded) {
+            if (fontLoaded && neighborMines > 0) {
                 sf::Text text(font);
                 text.setString(std::to_string(neighborMines));
                 text.setCharacterSize(18);
@@ -119,6 +119,11 @@ void Cell::setMine()
     m_isMine = true;
 }
 
+bool Cell::isMine() const
+{
+    return m_isMine;
+}
+
 int Cell::getRow() const
 {
     return m_row;
@@ -127,4 +132,19 @@ int Cell::getRow() const
 int Cell::getCol() const
 {
     return m_col;
+}
+
+void Cell::setNeighborMines(int count)
+{
+    neighborMines = count;
+}
+
+int Cell::getNeighborMines() const
+{
+    return neighborMines;
+}
+
+bool Cell::isRevealed() const
+{
+    return m_isRevealed;
 }

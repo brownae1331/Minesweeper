@@ -13,6 +13,7 @@ class Board : public sf::Drawable {
     private:
     void draw(sf::RenderTarget& target, sf::RenderStates states = {}) const override;
     void initializeBoard(Cell& initialCell);
+    void floodRevealFrom(int startRow, int startCol);
     std::vector<std::vector<Cell>> m_cells;
     int m_rows;
     int m_cols;
