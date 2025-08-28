@@ -1,7 +1,6 @@
 #include "../include/Cell.hpp"
 #include <string>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics.hpp>
 
 Cell::Cell(int row, int col, bool isMine) : 
     m_row(row), m_col(col), m_isMine(isMine), m_isRevealed(false), m_isFlagged(false), neighborMines(0) 
@@ -48,6 +47,30 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const
             text.setPosition(sf::Vector2f(posX, posY));
             
             target.draw(text);
+        }
+    }
+
+    if (m_isFlagged) {
+        static sf::Texture flagTexture;
+        static bool flagLoaded = false;
+        if (!flagLoaded) {
+            flagLoaded = flagTexture.loadFromFile("/Users/andy/Desktop/Minesweeper/assets/sprites/Single-Flag.png");
+            if (flagLoaded) {
+                flagTexture.setSmooth(true);
+            }
+        }
+
+        if (flagLoaded) {
+            sf::Sprite flagSprite(flagTexture);
+            const float baseX = static_cast<float>(m_col * SIZE);
+            const float baseY = static_cast<float>(m_row * SIZE);
+            const sf::FloatRect spriteBounds = flagSprite.getLocalBounds();
+            const float scaleX = static_cast<float>(SIZE) / spriteBounds.size.x;
+            const float scaleY = static_cast<float>(SIZE) / spriteBounds.size.y;
+            const float uniformScale = (scaleX < scaleY ? scaleX : scaleY);
+            flagSprite.setScale(sf::Vector2f(uniformScale, uniformScale));
+            flagSprite.setPosition(sf::Vector2f(baseX, baseY));
+            target.draw(flagSprite, states);
         }
     }
 }
