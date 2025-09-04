@@ -1,6 +1,7 @@
 #include "../include/Cell.hpp"
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 Cell::Cell(int row, int col, bool isMine) : 
     m_row(row), m_col(col), m_isMine(isMine), m_isRevealed(false), m_isFlagged(false), neighborMines(0) 
@@ -92,4 +93,10 @@ void Cell::flag()
 bool Cell::isFlagged() const
 {
     return m_isFlagged;
+}
+
+void Cell::setMine()
+{
+    m_isMine = true;
+    std::cout << "(" << m_row << ", " << m_col << ")\n";
 }
