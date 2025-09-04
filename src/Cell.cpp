@@ -33,7 +33,7 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const
             }
         }
         
-        if (fontLoaded) {
+        if (fontLoaded && neighborMines > 0) {
             sf::Text text(font);
             text.setString(std::to_string(neighborMines));
             text.setCharacterSize(18);
