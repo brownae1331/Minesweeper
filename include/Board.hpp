@@ -12,6 +12,7 @@ class Board : public sf::Drawable {
         
     private:
     void draw(sf::RenderTarget& target, sf::RenderStates states = {}) const override;
+    void assignNeighborMines();
     void initializeBoard(Cell& startingCell);
     std::vector<std::vector<Cell>> m_cells;
     int m_rows;

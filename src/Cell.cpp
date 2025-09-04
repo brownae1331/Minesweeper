@@ -100,3 +100,13 @@ void Cell::setMine()
     m_isMine = true;
     std::cout << "(" << m_row << ", " << m_col << ")\n";
 }
+
+int Cell::getRow() const
+{
+    return m_row;
+}
+
+int Cell::getCol() const
+{
+    return m_col;
+}

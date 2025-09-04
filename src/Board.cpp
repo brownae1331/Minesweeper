@@ -30,7 +30,7 @@ void Board::handleClick(const sf::Vector2i& pixelPosition, bool isRightClick)
     if (isRightClick) {
         cell.flag();
     } else {
-        if (!is_initialized){
+        if (!is_initialized) {
             initializeBoard(cell);
             is_initialized = true;
         }
@@ -40,7 +40,8 @@ void Board::handleClick(const sf::Vector2i& pixelPosition, bool isRightClick)
     }
 }
 
-void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const 
+{
     for (const auto& row : m_cells) {
         for (const auto& cell : row) {
             target.draw(cell, states);
@@ -48,24 +49,41 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     }
 }
 
-void Board::initializeBoard(Cell& startingCell) {
+void Board::assignNeighborMines() 
+{
+}
+
+void Board::initializeBoard(Cell& startingCell) 
+{
     std::vector<std::tuple<int, int>> mineCoordinates;
+    std::vector<std::tuple<int, int>> forbidden;
     mineCoordinates.reserve(m_mines);
+    forbidden.reserve(9);
+
+    const int startingCol = startingCell.getCol();
+    const int startingRow = startingCell.getRow();
 
     static std::random_device rd;
     static std::mt19937 gen(rd());
     std::uniform_int_distribution<int> xDist(0, m_cols-1);
     std::uniform_int_distribution<int> yDist(0, m_rows-1);
-
-    while (mineCoordinates.size() < m_mines){
+    
+    while (mineCoordinates.size() < m_mines) {
         std::tuple<int, int> mineCoord(xDist(gen), yDist(gen));
+        for (int dx = -1; dx <= 1; ++dx) {
+            for (int dy = -1; dy <= 1; ++dy){
+                forbidden.emplace_back(startingCol + dx, startingRow + dy);
+            }
+        }
 
-        if (std::find(mineCoordinates.begin(), mineCoordinates.end(), mineCoord) == mineCoordinates.end()){
+        if (std::find(mineCoordinates.begin(), mineCoordinates.end(), mineCoord) == mineCoordinates.end() 
+            && std::find(forbidden.begin(), forbidden.end(), mineCoord) == forbidden.end()) {
 
             mineCoordinates.push_back(mineCoord);
         }
     }
-    for (const auto& t : mineCoordinates){
+
+    for (const auto& t : mineCoordinates) {
         Cell& cell = m_cells[std::get<0>(t)][std::get<1>(t)];
         cell.setMine();
     }
